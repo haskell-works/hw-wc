@@ -42,7 +42,6 @@ common base                     { build-depends: base                     >= 4.7
 common appar                    { build-depends: appar                    >= 0.1.8      && < 0.2    }
 common bits-extra               { build-depends: bits-extra               >= 0.0.1.2    && < 0.1    }
 common bytestring               { build-depends: bytestring               >= 0.10       && < 0.11   }
-common cassava                  { build-depends: cassava                  >= 0.5.1.0    && < 0.6    }
 common criterion                { build-depends: criterion                >= 1.4.1.0    && < 1.6    }
 common deepseq                  { build-depends: deepseq                  >= 1.4        && < 1.5    }
 common directory                { build-depends: directory                >= 1.2.2      && < 1.4    }
@@ -104,21 +103,12 @@ library
                       , semigroups
                       , transformers
                       , vector
-  exposed-modules:
-                        HaskellWorks.Data.Dsv.Internal.Bits
-                        HaskellWorks.Data.Dsv.Internal.Broadword
-                        HaskellWorks.Data.Dsv.Internal.Char
-                        HaskellWorks.Data.Dsv.Internal.Char.Word64
-                        HaskellWorks.Data.Dsv.Internal.Vector
-                        HaskellWorks.Data.Dsv.Lazy.Cursor
-                        HaskellWorks.Data.Dsv.Lazy.Cursor.Internal
-                        HaskellWorks.Data.Dsv.Lazy.Cursor.Lazy
-                        HaskellWorks.Data.Dsv.Lazy.Cursor.Strict
-                        HaskellWorks.Data.Dsv.Lazy.Cursor.Type
-                        HaskellWorks.Data.Dsv.Strict.Cursor
-                        HaskellWorks.Data.Dsv.Strict.Cursor.Internal
-                        HaskellWorks.Data.Dsv.Strict.Cursor.Internal.Reference
-                        HaskellWorks.Data.Dsv.Strict.Cursor.Type
+  exposed-modules:      HaskellWorks.Wc.Broadword
+                        HaskellWorks.Wc.ByteWise
+                        HaskellWorks.Wc.Char
+                        HaskellWorks.Wc.Counts
+                        HaskellWorks.Wc.StateMachine
+                        HaskellWorks.Wc.Word64
   other-modules:        Paths_hw_wc
   autogen-modules:      Paths_hw_wc
   hs-source-dirs:       src
@@ -146,13 +136,11 @@ executable hw-wc
                       , transformers
                       , vector
   main-is:              Main.hs
-  other-modules:        App.Char
-                        App.Commands
+  other-modules:        App.Commands
+                        App.Commands.Broadword
                         App.Commands.Simple
-                        App.Commands.Options.Parse
+                        App.Commands.StateMachine
                         App.Commands.Options.Type
-                        App.Data.List
-                        App.Gen
                         App.IO
   hs-source-dirs:       app
   ghc-options:          -threaded -rtsopts -with-rtsopts=-N
@@ -176,6 +164,7 @@ test-suite hw-wc-test
                       , text
                       , vector
   ghc-options:          -threaded -rtsopts -with-rtsopts=-N
+  other-modules:        HaskellWorks.Wc.BroadwordSpec
   build-depends:        hw-wc
   type:                 exitcode-stdio-1.0
   main-is:              Spec.hs
@@ -186,7 +175,6 @@ benchmark bench
   import:               base, config
                       , bits-extra
                       , bytestring
-                      , cassava
                       , criterion
                       , deepseq
                       , directory

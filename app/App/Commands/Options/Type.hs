@@ -1,12 +1,22 @@
 {-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 
-module App.Commands.Options.Type where
+module App.Commands.Options.Type
+  ( SimpleOptions(..)
+  , BroadwordOptions(..)
+  , StateMachineOptions(..)
+  ) where
 
 import GHC.Generics
-import GHC.Word     (Word8)
 
-data SimpleOptions = SimpleOptions
+newtype SimpleOptions = SimpleOptions
   { filePath  :: FilePath
-  , delimiter :: Word8
+  } deriving (Eq, Show, Generic)
+
+newtype BroadwordOptions = BroadwordOptions
+  { filePath  :: FilePath
+  } deriving (Eq, Show, Generic)
+
+newtype StateMachineOptions = StateMachineOptions
+  { filePath  :: FilePath
   } deriving (Eq, Show, Generic)

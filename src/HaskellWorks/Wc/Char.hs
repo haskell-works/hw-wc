@@ -1,4 +1,4 @@
-module HaskellWorks.Data.Dsv.Internal.Char where
+module HaskellWorks.Wc.Char where
 
 import Data.Char
 import Data.Word
