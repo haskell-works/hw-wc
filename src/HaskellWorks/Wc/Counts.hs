@@ -1,9 +1,15 @@
+{-# LANGUAGE DeriveAnyClass     #-}
+{-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE StandaloneDeriving #-}
+
 module HaskellWorks.Wc.Counts
   ( Counts(..)
   ) where
 
+import Control.DeepSeq
 import Data.Word
-import Prelude   hiding (lines)
+import GHC.Generics
+import Prelude         hiding (lines)
 
 import qualified Data.ByteString      as BS
 import qualified Data.ByteString.Lazy as LBS
@@ -12,7 +18,9 @@ data Counts = Counts
   { bytes :: !Word64
   , lines :: !Word64
   , chars :: !Word64
-  } deriving (Eq, Show)
+  } deriving (Eq, Show, Generic)
+
+deriving instance NFData Counts
 
 instance Semigroup Counts where
   a <> b = Counts
