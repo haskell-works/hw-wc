@@ -8,6 +8,7 @@ module HaskellWorks.Wc.Broadword
   , countLinesBs
   , countLinesLbss
   , w64CountChars
+  , parCountLinesLbss
   ) where
 
 import Data.Foldable
@@ -22,6 +23,7 @@ import qualified HaskellWorks.Data.Vector.AsVector64 as DVS
 import qualified HaskellWorks.Data.Vector.AsVector8  as DVS
 import qualified HaskellWorks.Wc.Char                as C
 import qualified HaskellWorks.Wc.Counts              as Z
+import qualified HaskellWorks.Wc.List                as L
 import qualified HaskellWorks.Wc.Word64              as W64
 
 countsW8 :: Word8 -> Z.Counts
@@ -62,6 +64,9 @@ countLinesBs bs =
       countLinesDvsW64 (DVS.take  q       (DVS.asVector64 bs))
   <>  countLinesDvsW8  (DVS.drop (q * 8)  (DVS.asVector8 bs))
   where q = BS.length bs `div` 8
+
+parCountLinesLbss :: Int -> LBS.ByteString -> Z.Counts
+parCountLinesLbss n = fold . L.parLookAhead n . fmap countLinesBs . LBS.toChunks
 
 countLinesLbss :: LBS.ByteString -> Z.Counts
 countLinesLbss = fold . fmap countLinesBs . LBS.toChunks

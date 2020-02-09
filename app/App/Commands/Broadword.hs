@@ -23,7 +23,9 @@ runBroadword opts = do
 
   !lbs <- IO.readInputFile filePath
 
-  let counts = Z.countLinesLbss lbs
+  counts <- pure $ case opts ^. the @"lookahead" of
+    0 -> Z.countLinesLbss      lbs
+    n -> Z.parCountLinesLbss n lbs
 
   IO.putStrLn $ "Bytes: " <> show (Z.bytes counts)
   IO.putStrLn $ "Lines: " <> show (Z.lines counts)
@@ -37,6 +39,12 @@ optsBroadword = Z.BroadwordOptions
         (   long "input"
         <>  short 'i'
         <>  help "Input file"
+        <>  metavar "STRING"
+        )
+  <*> option auto
+        (   long "sparks"
+        <>  short 'a'
+        <>  help "Number of chunks of look ahead"
         <>  metavar "STRING"
         )
 

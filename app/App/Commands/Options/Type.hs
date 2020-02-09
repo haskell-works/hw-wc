@@ -13,8 +13,9 @@ newtype SimpleOptions = SimpleOptions
   { filePath  :: FilePath
   } deriving (Eq, Show, Generic)
 
-newtype BroadwordOptions = BroadwordOptions
+data BroadwordOptions = BroadwordOptions
   { filePath  :: FilePath
+  , lookahead :: Int
   } deriving (Eq, Show, Generic)
 
 newtype StateMachineOptions = StateMachineOptions
