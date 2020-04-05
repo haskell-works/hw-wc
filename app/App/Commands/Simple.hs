@@ -9,7 +9,6 @@ module App.Commands.Simple
 
 import Control.Lens
 import Data.Generics.Product.Any
-import Data.Semigroup                 ((<>))
 import Data.Word
 import HaskellWorks.Data.Bits.BitWise
 import Options.Applicative            hiding (columns)

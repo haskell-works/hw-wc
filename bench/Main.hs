@@ -3,7 +3,6 @@
 module Main where
 
 import Criterion.Main
-import Data.Monoid    ((<>))
 
 makeBenchWc :: IO [Benchmark]
 makeBenchWc = return []

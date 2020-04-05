@@ -3,7 +3,6 @@ module App.Commands where
 import App.Commands.Broadword
 import App.Commands.Simple
 import App.Commands.StateMachine
-import Data.Semigroup            ((<>))
 import Options.Applicative
 
 commands :: Parser (IO ())
