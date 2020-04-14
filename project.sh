@@ -18,7 +18,6 @@ cabal-install() {
 cabal-build() {
   cabal v2-build \
     --enable-tests \
-    --enable-benchmarks \
     --write-ghc-environment-files=ghc8.4.4+ \
     $CABAL_FLAGS "$@"
 }
@@ -26,8 +25,8 @@ cabal-build() {
 cabal-test() {
   cabal v2-test \
     --enable-tests \
-    --enable-benchmarks \
     --test-show-details=direct \
+    --test-options='+RTS -g1' \
     $CABAL_FLAGS "$@"
 }
 
