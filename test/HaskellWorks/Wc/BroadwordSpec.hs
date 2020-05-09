@@ -18,7 +18,7 @@ import qualified HaskellWorks.Wc.ByteWise            as BW
 import qualified Hedgehog.Gen                        as G
 import qualified Hedgehog.Range                      as R
 
-{-# ANN module ("HLint: ignore Redundant do" :: String) #-}
+{- HLINT ignore "Redundant do"  -}
 
 spec :: Spec
 spec = describe "HaskellWorks.Wc.BroadwordSpec" $ do
